@@ -1,4 +1,25 @@
-### Key Features
+# Capacitor SignalR
+
+A Capacitor plugin that provides native SignalR client functionality for iOS and Android with web fallback support.
+
+## 📱 Demo App
+
+Want to see the plugin in action? Check out our **[Demo Repository](https://github.com/dotnetdreamer/capacitor-signalr-demo)** that showcases real-time chat functionality with complete setup instructions.
+
+### Demo Features
+- ✅ Real-time bidirectional messaging between mobile and web clients
+- ✅ Connection state monitoring
+- ✅ Auto-reconnection handling
+- ✅ Cross-platform compatibility testing
+- ✅ Complete ASP.NET Core SignalR backend
+- ✅ Ionic Angular mobile client
+- ✅ Web client for testing
+
+**👉 [Get the Demo App](https://github.com/dotnetdreamer/capacitor-signalr-demo)**
+
+---
+
+## Key Features
 - 🚀 Native performance on iOS and Android
 - 🔄 Real-time bidirectional communication
 - 🌐 Multiple transport protocols (WebSockets, SSE, Long Polling)
@@ -12,6 +33,41 @@
 ```bash
 npm install capacitor-signalr
 npx cap sync
+```
+
+## Quick Start
+
+```typescript
+import { CapacitorSignalR, ConnectionState, TransportType } from 'capacitor-signalr';
+
+// Create connection
+const connection = await CapacitorSignalR.create({
+  url: 'https://your-signalr-hub.com/chatHub',
+  enableAutoReconnect: true,
+  transport: TransportType.ALL,
+  logLevel: 'Information'
+});
+
+// Listen for messages
+await CapacitorSignalR.addListener('onReceive', (event) => {
+  if (event.eventName === 'ReceiveMessage') {
+    console.log('Received:', event.data);
+  }
+});
+
+// Subscribe to hub methods
+await CapacitorSignalR.on({ eventName: 'ReceiveMessage' });
+
+// Send messages
+await CapacitorSignalR.invoke({
+  methodName: 'SendMessage',
+  args: ['username', 'Hello World!']
+});
+
+// Monitor connection state
+await CapacitorSignalR.addListener('onConnectionStateChanged', (state) => {
+  console.log('Connection state:', state.state);
+});
 ```
 
 ## API
