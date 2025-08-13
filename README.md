@@ -1,6 +1,11 @@
-# capacitor-signalr
-
-Native signalr plugin for ionic capacitor
+### Key Features
+- 🚀 Native performance on iOS and Android
+- 🔄 Real-time bidirectional communication
+- 🌐 Multiple transport protocols (WebSockets, SSE, Long Polling)
+- 🔐 Authentication and custom headers support
+- ⚡ Auto-reconnection with configurable retry delays
+- 📱 Cross-platform compatibility (iOS, Android, Web)
+- 🎯 TypeScript support with full type definitions
 
 ## Install
 
@@ -305,7 +310,9 @@ Remove all listeners for this plugin
 
 Construct a type with a set of properties K of type T
 
-<code>{ [P in K]: T; }</code>
+<code>{
+ [P in K]: T;
+ }</code>
 
 
 ### Enums
