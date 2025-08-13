@@ -20,7 +20,7 @@ export interface ConnectionOptions {
   accessToken?: string;
   shouldSkipNegotiate?: boolean;
   skipNegotiation?: boolean;
-  headers?: Array<{ name: string; value: string }> | Record<string, string>;
+  headers?: { name: string; value: string }[] | Record<string, string>;
   handshakeResponseTimeout?: number;
   keepAliveInterval?: number;
   serverTimeout?: number;
