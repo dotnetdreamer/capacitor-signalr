@@ -1,5 +1,9 @@
 import Foundation
+#if canImport(SignalRClient)
+import SignalRClient
+#elseif canImport(SwiftSignalRClient)
 import SwiftSignalRClient
+#endif
 import SwiftyJSON
 
 @objc public class CapacitorSignalR: NSObject, HubConnectionDelegate {
