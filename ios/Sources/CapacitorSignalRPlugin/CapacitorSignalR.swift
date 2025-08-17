@@ -171,18 +171,44 @@ import SwiftyJSON
         }
         
         // Register a callback that will handle the event
-        // For simplicity, we'll send an empty data array for now
-        // A more complete implementation would extract the actual arguments
-        connection.on(method: eventName) { [weak self] (argumentExtractor: ArgumentExtractor) in
-            // For now, we'll just send an empty data array
-            // A more complete implementation would extract the arguments properly
-            self?.handleReceivedEvent(eventName: eventName, data: [])
+        // For the ReceiveMessage event, we'll register a specific handler
+        if eventName == "ReceiveMessage" {
+            // Handle the specific case of ReceiveMessage with two string parameters
+            connection.on(method: eventName) { [weak self] (user: String, message: String) in
+                let data: [Any] = [user, message]
+                self?.handleReceivedEvent(eventName: eventName, data: data)
+            }
+        } else {
+            // For other events, we'll use a more generic approach
+            connection.on(method: eventName) { [weak self] (argumentExtractor: ArgumentExtractor) in
+                // Try to extract arguments - we'll start with a simple approach
+                var data: [Any] = []
+                
+                // Try to extract arguments one by one until we get an error
+                do {
+                    // Try to extract as String first
+                    let arg1 = try argumentExtractor.getArgument(type: String.self)
+                    data.append(arg1)
+                } catch {
+                    // If that fails, we'll continue silently
+                }
+                
+                // Try to extract another argument as String
+                do {
+                    let arg2 = try argumentExtractor.getArgument(type: String.self)
+                    data.append(arg2)
+                } catch {
+                    // If that fails, we'll continue silently
+                }
+                
+                self?.handleReceivedEvent(eventName: eventName, data: data)
+            }
         }
         
         print("Subscribed to event: \(eventName)")
     }
     
-    @objc public func off(eventName: String) {
+    public func off(eventName: String) {
         // Note: The SignalR client doesn't have a direct way to remove callbacks
         // In a more complete implementation, we would need to track and manage this
         print("Unsubscribed from event: \(eventName)")
