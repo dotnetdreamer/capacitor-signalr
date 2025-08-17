@@ -27,13 +27,8 @@ public class CapacitorSignalRPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func create(_ call: CAPPluginCall) {
-        guard let options = call.options else {
-            call.reject("Options are required")
-            return
-        }
-        
         do {
-            let _ = try implementation.create(options: options)
+            let _ = try implementation.create(options: call.options as? [String: Any] ?? [:])
             
             // Start the connection
             implementation.start { [weak self] success, error, result in

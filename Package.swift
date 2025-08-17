@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "7.0.0"),
-        .package(url: "https://github.com/moozzyk/SignalR-Client-Swift", from: "0.9.0"),
+        .package(url: "https://github.com/moozzyk/SignalR-Client-Swift", from: "1.1.0"),
         .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "5.0.2")
     ],
     targets: [
