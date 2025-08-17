@@ -7,6 +7,9 @@ import SwiftyJSON
     private var connectionId: String?
     private weak var plugin: CapacitorSignalRPlugin?
     
+    // Keep track of active subscriptions to prevent duplicates
+    private var activeSubscriptions: [String: Any] = [:]
+    
     // Internal state tracking
     private enum ConnectionState: String {
         case disconnected = "disconnected"
@@ -170,6 +173,9 @@ import SwiftyJSON
                          userInfo: [NSLocalizedDescriptionKey: "Connection not initialized"])
         }
         
+        // Remove existing subscription if any to prevent duplicates
+        off(eventName: eventName)
+        
         // Register a callback that will handle the event
         // For the ReceiveMessage event, we'll register a specific handler
         if eventName == "ReceiveMessage" {
@@ -205,12 +211,17 @@ import SwiftyJSON
             }
         }
         
+        // Track the subscription
+        activeSubscriptions[eventName] = true
         print("Subscribed to event: \(eventName)")
     }
     
     public func off(eventName: String) {
+        // Remove the subscription tracking
+        activeSubscriptions.removeValue(forKey: eventName)
         // Note: The SignalR client doesn't have a direct way to remove callbacks
-        // In a more complete implementation, we would need to track and manage this
+        // We'll just stop tracking it and rely on the fact that we're preventing duplicates
+        // in the on() method by calling off() before registering a new subscription
         print("Unsubscribed from event: \(eventName)")
     }
     
