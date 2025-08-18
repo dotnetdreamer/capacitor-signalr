@@ -2,6 +2,11 @@
 
 A Capacitor plugin that provides native SignalR client functionality for iOS and Android with web fallback support.
 
+
+https://github.com/user-attachments/assets/b13fde4b-b8fe-4cc9-acc6-c3f797ef0d57
+
+
+
 ## 📱 Demo App
 
 Want to see the plugin in action? Check out our **[Demo Repository](https://github.com/dotnetdreamer/capacitor-signalr-demo)** that showcases real-time chat functionality with complete setup instructions.
@@ -366,7 +371,9 @@ Remove all listeners for this plugin
 
 Construct a type with a set of properties K of type T
 
-<code>{ [P in K]: T; }</code>
+<code>{
+ [P in K]: T;
+ }</code>
 
 
 ### Enums
