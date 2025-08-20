@@ -1,6 +1,6 @@
 {
   "name": "capacitor-signalr",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Native SignalR plugin for ionic capacitor that works on Web, Android and iOS",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
