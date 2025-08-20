@@ -7,6 +7,7 @@ export default {
       name: 'capacitorCapacitorSignalR',
       globals: {
         '@capacitor/core': 'capacitorExports',
+        '@microsoft/signalr': 'signalR',
       },
       sourcemap: true,
       inlineDynamicImports: true,
@@ -18,5 +19,5 @@ export default {
       inlineDynamicImports: true,
     },
   ],
-  external: ['@capacitor/core'],
+  external: ['@capacitor/core', '@microsoft/signalr'],
 };
